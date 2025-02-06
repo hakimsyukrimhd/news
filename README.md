@@ -11,7 +11,7 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 # ENDPOINTS NEWS
 
 | Routes | Method | Requirement |
-| ----------- | ----------- |
+| ----------- | ----------- | ----------- |
 | /news | GET | -| 
 | /news/:slug | GET | params| 
 | /news | POST | Body| 
@@ -33,7 +33,7 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 # ENDPOINTS USER/ AUTHOR
 
 | Routes | Method | Requirement |
-| ----------- | ----------- |
+| ----------- | ----------- | ----------- |
 | /users/register | POST | Body |
 | /users/login | POST | Body |
 | /users/:id | GET | params |
@@ -52,7 +52,7 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 # ENDPOINTS CATEGORY
 
 | Routes | Method | Requirement |
-| ----------- | ----------- |
+| ----------- | ----------- | ----------- |
 | /news/category | GET | - |
 | /news/category/:slug | GET | params |
 | /news/category | POST | Body |
@@ -72,7 +72,7 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 Create Database with name : News
 
 | Tabel Name | Fields | Relation |
-| ----------- | ----------- |
+| ----------- | ----------- | ----------- |
 | users | username, password | user has many news |
 | news | title, body, imageUrl, userId, categoryId | news has one category, news belongs to user |
 | categories | name | category has many news |
