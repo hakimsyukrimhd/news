@@ -6,4 +6,21 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:title", (req, res) => {
+  const newsParams = req.params.title;
+});
+
+router.post("/", (req, res) => {
+  const newsBody = req.body;
+});
+
+router.patch("/:title", (req, res) => {
+  const newsParams = req.params.title;
+  const newsBody = req.body;
+});
+
+router.delete("/:title", (req, res) => {
+  const newsParams = req.params.title;
+});
+
 module.exports = router;
