@@ -1,0 +1,14 @@
+{
+  "name": "kumparan",
+  "version": "1.0.0",
+  "description": "News collection from kumparan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hakim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
