@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const news = require("./news");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -6,6 +7,6 @@ router.get("/", (req, res) => {
   });
 });
 
-router.use("/news")
+router.use("/news", news);
 
 module.exports = router;
