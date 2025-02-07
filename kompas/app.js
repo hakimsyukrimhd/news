@@ -1,13 +1,16 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
-const app = express()
-const PORT = process.env.PORT || 3000
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+const cors = require("cors");
 
-// Routes
-const newsRoutes = require("./routes/news")
+app.use(express.static("public"));
+app.use(cors());
 
-app.use("/news", newsRoutes)
+// Import Routes
+const newsRoutes = require("./routes/news");
 
+app.use("/news", newsRoutes);
 
-app.listen(PORT, ()=> console.log("app running on port,", PORT))
+app.listen(PORT, () => console.log("app running on port,", PORT));
