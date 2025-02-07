@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const categories = require("./category");
 
 router.get("/", (req, res) => {
   res.status(200).json({
-    massage: "All of news will display here",
+    massage: "All of Categories will display here",
   });
 });
 
@@ -15,15 +14,13 @@ router.post("/", (req, res) => {
   const newsBody = req.body;
 });
 
-router.patch("/:slug", (req, res) => {
-  const newsParams = req.params.slug;
+router.patch("/:id", (req, res) => {
+  const newsParams = req.params.id;
   const newsBody = req.body;
 });
 
-router.delete("/:slug", (req, res) => {
-  const newsParams = req.params.slug;
+router.delete("/:id", (req, res) => {
+  const newsParams = req.params.id;
 });
-
-router.use("/category", categories);
 
 module.exports = router;
