@@ -9,6 +9,11 @@ router.post("/register", async (req, res) => {
       massage: "User berhasil didaftarkan",
     });
   } catch (err) {
+    if (err.code === "23502") {
+      return res.status(404).json({
+        error: "Masukkan data yang lengkap",
+      });
+    }
     if (err.code === "23505") {
       return res.status(404).json({
         error: "Username sudah digunakan",
@@ -22,7 +27,10 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  const userBody = req.body;
+  try {
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 router.get("/:id", async (req, res) => {
@@ -74,6 +82,11 @@ router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const getUser = await pool.query("delete from users where id = $1", [id]);
+    if (getUser.rows.length === 0) {
+      return res.status(404).json({
+        error: "User tidak ditemukan",
+      });
+    }
     res.status(200).json({
       massage: "User berhasil dihapus",
     });
