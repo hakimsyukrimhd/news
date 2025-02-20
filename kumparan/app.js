@@ -5,6 +5,8 @@ const homePage = require("./routes/homepage");
 
 // MIDDLEWARE
 
+app.use(express.json());
+
 app.use((req, res, next) => {
   const date = new Date();
   console.log("LOGGED");
