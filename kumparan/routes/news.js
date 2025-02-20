@@ -13,19 +13,7 @@ router.get("/:slug", (req, res) => {
   const newsParams = req.params.slug;
 });
 
-router.post("/", (req, res) => {
-  const newsBody = req.body;
-
-  const lengthbody = (obj) => {
-    return Object.keys(obj).length;
-  };
-
-  if (lengthbody(newsBody) < 5) {
-    res.status(404).json({
-      massage: "Data yang anda masukkan tidak lengkap!",
-    });
-  }
-});
+router.post("/", (req, res) => {});
 
 router.patch("/:slug", (req, res) => {
   const newsParams = req.params.slug;
