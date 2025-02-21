@@ -39,28 +39,26 @@ router.get("/:slug", async (req, res) => {
 router.post("/", async (req, res) => {
   const client = await pool.connect();
   try {
-    await client.query("begin");
-
     const { name } = req.body;
-
+    
     if (!name) {
-      await client.query("rollback");
       return res.status(400).json({
         error: "Please input the category name",
       });
     }
-
+    
     const checkCategory = "select * from categories where name = $1";
     const checkValue = [name];
     const checkResult = await client.query(checkCategory, checkValue);
 
     if (checkResult.rows.length > 0) {
-      await client.query("rollback");
       return res.status(409).json({
         error: "The category is already on the list ",
       });
     }
-
+    
+    await client.query("begin");
+    
     const query = "insert into categories(name) values($1) returning *";
     const values = [name];
     const result = await client.query(query, values);
