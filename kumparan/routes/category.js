@@ -82,9 +82,31 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", (req, res) => {
-  const newsParams = req.params.id;
-  const newsBody = req.body;
+router.patch("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    const query = "update categories set name = $1 where id = $2 returning *";
+    const values = [name, id];
+    const result = await pool.query(query, values);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        error: "The category does not exist",
+      });
+    }
+
+    res.status(200).json({
+      message: "The category succesfully updated",
+      row: result.rows[0],
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "There is an error on the server",
+    });
+  }
 });
 
 router.delete("/:id", (req, res) => {
