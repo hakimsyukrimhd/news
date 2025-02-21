@@ -109,8 +109,29 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  const newsParams = req.params.id;
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const query = "delete from categories where id = $1";
+    const values = [id];
+    const result = await pool.query(query, values);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        error: "Category does not exist",
+      });
+    }
+
+    res.status(200).json({
+      message: "Category has been succesfully deleted",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "There is an error on the server",
+    });
+  }
 });
 
 module.exports = router;
