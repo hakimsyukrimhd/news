@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
   }
 });
 
+// yang bawah ganti pakai id, kirim respon berikut dengan data news, join, nama kategori
+
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
@@ -84,6 +86,8 @@ router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
+
+    // sebelum update, cari dulu apakah id catgori itu ada atau tidak di categories
 
     const query = "update categories set name = $1 where id = $2 returning *";
     const values = [name, id];

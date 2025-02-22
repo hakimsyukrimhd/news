@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const news = require("./news");
-const user = require("./users");
+const user = require("./users-routes");
 
 router.get("/", (req, res) => {
   res.status(200).json({

@@ -1,12 +1,29 @@
 const router = require("express").Router();
 const categories = require("./category");
 const pool = require("../database/database");
+const { getNews } = require("../controllers/news-controllers");
 
 router.use("/category", categories);
 
-router.get("/", async (req, res) => {
+// user tampilkan nama, category tampilkan nama category, lakukan join
+// semua controller di folder control, dan semua
+router.get("/", (req, res) => {
+  getNews(req,res);
+});
+
+router.get("/:slug", async (req, res) => {
   try {
-    const result = await pool.query("select * from news");
+    const { slug } = req.params;
+
+    const query = "select * from news where slug = $1";
+    const values = [slug];
+    const result = await pool.query(query, values);
+
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        error: "The news doesn't exist",
+      });
+    }
 
     res.status(200).json(result.rows);
   } catch (err) {
@@ -17,25 +34,25 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:slug", (req, res) => {
-  const newsParams = req.params.slug;
-});
-
-// baru sampai get pertama
 router.post("/", async (req, res) => {
   try {
-    const { title, body, imageUrl, date, userId, categoryId } = req.body;
+    const { title, body, imageUrl, userId, categoryId } = req.body;
 
-    if (!title && !body && !imageUrl && date && !userId && !categoryId) {
-      return res.status(404).json({
-        error: "Please provide at least one field to input",
+    if (!title || !userId) {
+      return res.status(400).json({
+        error: "The title and userId fields cannot be empty",
       });
     }
 
-    const checkCategory = await pool.query("select * from categories where id = $1", [categoryId]);
-    if (checkCategory.rows.length === 0) {
-      const addCategory = await pool.query("insert into categories(name) values($1)", [categoryId]);
-    }
+    const slug = title.split(" ").join("-").toLowerCase();
+
+    const query = "insert into news(title, body, imageUrl, userId, categoryId, slug) values($1, $2, $3, $4, $5, $6)";
+    const values = [title, body, imageUrl, userId, categoryId, slug];
+    const result = await pool.query(query, values);
+
+    res.status(201).json({
+      message: "News has been succesfully posted",
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({
