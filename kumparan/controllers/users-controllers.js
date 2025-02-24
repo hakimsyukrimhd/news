@@ -4,6 +4,7 @@ const { userGetByIdModels } = require("../models/users-models");
 const { userUpdateByidModels } = require("../models/users-models");
 const { userDeleteByIdModels } = require("../models/users-models");
 
+// USER REGISTER CONTROLLER
 const userRegister = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -32,6 +33,7 @@ const userRegister = async (req, res) => {
   }
 };
 
+// USER LOGIN CONTROLLER
 const userLogin = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -60,6 +62,7 @@ const userLogin = async (req, res) => {
   }
 };
 
+// GET USER BY ID CONTROLLER
 const userGetById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -80,6 +83,7 @@ const userGetById = async (req, res) => {
   }
 };
 
+// UPDATE USER BY ID CONTROLLER
 const userUpdateByid = async (req, res) => {
   try {
     const { id } = req.params;
@@ -110,6 +114,7 @@ const userUpdateByid = async (req, res) => {
   }
 };
 
+// DELETE USER BY ID CONTROLLER
 const userDeleteById = async (req, res) => {
   try {
     const { id } = req.params;

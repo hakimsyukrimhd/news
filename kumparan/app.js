@@ -26,6 +26,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// MAIN ROUTE
+
 app.use("/", homePage);
 
 app.listen(PORT, () => {

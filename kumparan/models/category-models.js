@@ -1,9 +1,12 @@
 const pool = require("../database/database");
 
+
+// GET ALL CATEGORIES MODELS
 const getAllCategoriesModels = async () => {
   return await pool.query("select * from categories");
 };
 
+// GET CATEGORY BY ID MODELS
 const getCategorybyIdModels = async (id) => {
   const query = "select * from categories where id = $1";
   const values = [id];
@@ -15,6 +18,7 @@ const getCategorybyIdModels = async (id) => {
   return result;
 };
 
+// ADD CATEGORY MODELS
 const addCategoryModels = async (name) => {
   const client = await pool.connect();
 
@@ -39,6 +43,7 @@ const addCategoryModels = async (name) => {
   return result;
 };
 
+// UPDATE CATEGORY BY ID MODELS
 const updateCategoryByIdModels = async (id, name) => {
   const query = "update categories set name = $1 where id = $2 returning *";
   const values = [name, id];
@@ -51,6 +56,7 @@ const updateCategoryByIdModels = async (id, name) => {
   return result;
 };
 
+// DELETE CATEGORY BY ID MODELS
 const deleteCategoryByIdModels = async (id) => {
   const query = "delete from categories where id = $1";
   const values = [id];

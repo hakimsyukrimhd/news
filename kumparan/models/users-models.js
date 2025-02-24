@@ -1,5 +1,6 @@
 const pool = require("../database/database");
 
+// USER REGISTER MODELS
 const userRegisterModels = async (username, password) => {
   const client = await pool.connect();
 
@@ -22,6 +23,7 @@ const userRegisterModels = async (username, password) => {
   client.release();
 };
 
+// USER LOGIN MODELS
 const userLoginModels = async (username, password) => {
   let query = "select * from users where username = $1 and password = $2";
   let values = [username, password];
@@ -32,6 +34,7 @@ const userLoginModels = async (username, password) => {
   }
 };
 
+// GET USER BY ID MODELS
 const userGetByIdModels = async (id) => {
   const query = "select id, username from users where id = $1";
   const values = [id];
@@ -43,6 +46,7 @@ const userGetByIdModels = async (id) => {
   return result;
 };
 
+// UPDATE USER BY ID MODELS
 const userUpdateByidModels = async (id, username, password) => {
   let query, values;
 
@@ -66,6 +70,7 @@ const userUpdateByidModels = async (id, username, password) => {
   return result;
 };
 
+// DELETE USER BY ID MODELS
 const userDeleteByIdModels = async (id) => {
   const query = "delete from users where id = $1";
   const values = [id];

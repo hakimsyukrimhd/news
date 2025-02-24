@@ -4,6 +4,7 @@ const { addNewsModels } = require("../models/news-models");
 const { updateNewsBySlugModels } = require("../models/news-models");
 const { deleteNewsBySlugModels } = require("../models/news-models");
 
+// GET ALL NEWS CONTROLLER
 const getAllNews = async (req, res) => {
   try {
     const result = await getAllNewsModels();
@@ -16,6 +17,7 @@ const getAllNews = async (req, res) => {
   }
 };
 
+// GET NEWS BY SLUG CONTROLLER
 const getNewsBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -36,6 +38,7 @@ const getNewsBySlug = async (req, res) => {
   }
 };
 
+// ADD NEWS CONTROLLER
 const addNews = async (req, res) => {
   try {
     const { title, body, imageUrl, userId, categoryId } = req.body;
@@ -64,6 +67,7 @@ const addNews = async (req, res) => {
   }
 };
 
+// UPDATE NEWS BY SLUG CONTROLLER
 const updateNewsBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -93,6 +97,7 @@ const updateNewsBySlug = async (req, res) => {
   }
 };
 
+// DELETE NEWS BY SLUG CONTROLLER
 const deleteNewsBySlug = async (req, res) => {
   try {
     const { slug } = req.params;

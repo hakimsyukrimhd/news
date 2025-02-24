@@ -4,6 +4,7 @@ const { addCategoryModels } = require("../models/category-models");
 const { updateCategoryByIdModels } = require("../models/category-models");
 const { deleteCategoryByIdModels } = require("../models/category-models");
 
+// GET ALL CATEGORIES CONTROLLER
 const getAllCategories = async (req, res) => {
   try {
     const result = await getAllCategoriesModels();
@@ -16,6 +17,7 @@ const getAllCategories = async (req, res) => {
   }
 };
 
+// GET CATEGORY BY ID CONTROLLER
 const getCategorybyId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -36,6 +38,7 @@ const getCategorybyId = async (req, res) => {
   }
 };
 
+// ADD CATEGORY CONTROLLER
 const addCategory = async (req, res) => {
   try {
     const { name } = req.body;
@@ -66,6 +69,7 @@ const addCategory = async (req, res) => {
   }
 };
 
+// UPDATE CATEGORY BY ID CONTROLLER
 const updateCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -90,6 +94,7 @@ const updateCategoryById = async (req, res) => {
   }
 };
 
+// DELETE CATEGORY BY ID CONTROLLER
 const deleteCategoryById = async (req, res) => {
   try {
     const { id } = req.params;

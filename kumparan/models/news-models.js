@@ -1,10 +1,12 @@
 const pool = require("../database/database");
 const slugify = require("slugify");
 
+// GET ALL NEWS MODELS
 const getAllNewsModels = async () => {
   return await pool.query("select news.*, users.username as user_name, categories.name as category_name from news join users on users.id = news.userId join categories on categories.id = news.categoryId");
 };
 
+// GET NEWS BY SLUG MODELS
 const getNewsBySlugModels = async (slug) => {
   const query = "select news.*, users.username as user_name, categories.name as category_name from news join users on users.id = news.userId join categories on categories.id = news.categoryId where slug = $1";
   const values = [slug];
@@ -17,6 +19,7 @@ const getNewsBySlugModels = async (slug) => {
   return result;
 };
 
+// ADD NEWS MODELS
 const addNewsModels = async (title, body, imageUrl, userId, categoryId) => {
   const client = await pool.connect();
 
@@ -41,6 +44,7 @@ const addNewsModels = async (title, body, imageUrl, userId, categoryId) => {
   client.release();
 };
 
+// UPDATE NEWS BY SLUG MODELS
 const updateNewsBySlugModels = async (slug, title, body, imageUrl, userId, categoryId) => {
   const queryGetNewsBySlug = "select * from news where slug = $1";
   const valueGetNewsBySlug = [slug];
@@ -73,6 +77,7 @@ const updateNewsBySlugModels = async (slug, title, body, imageUrl, userId, categ
   return result;
 };
 
+// DELETE NEWS BY SLUG MODELS
 const deleteNewsBySlugModels = async (slug) => {
   const query = "delete from news where slug = $1";
   const values = [slug];
