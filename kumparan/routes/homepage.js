@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const news = require("./news");
+const news = require("./news-routes");
 const user = require("./users-routes");
 
 router.get("/", (req, res) => {
