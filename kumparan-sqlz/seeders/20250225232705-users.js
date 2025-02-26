@@ -10,13 +10,15 @@ module.exports = {
      */
     const users = [
       {
-        username: "udin",
+        name: "udin",
+        username: "udin_ud",
         password: "udin123",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "anton",
+        name: "anton",
+        username: "anton_po",
         password: "anton124",
         createdAt: new Date(),
         updatedAt: new Date(),

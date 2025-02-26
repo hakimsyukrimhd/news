@@ -54,7 +54,7 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 | Routes               | Method | Requirement   |
 | -------------------- | ------ | ------------- |
 | /news/category       | GET    | -             |
-| /news/category/:slug | GET    | params        |
+| /news/category/:id   | GET    | params        |
 | /news/category       | POST   | Body          |
 | /news/category/:id   | PATCH  | body & params |
 | /news/category/:id   | DELETE | params        |
