@@ -58,6 +58,14 @@ const addCategory = async (req, res) => {
   try {
     const { name } = req.body;
 
+    if (!name) {
+      return res.status(409).json({
+        success: false,
+        message: "Data cannot empty",
+        data: {},
+      });
+    }
+
     const checkCategory = await Category.findOne({ where: { name } });
 
     if (checkCategory) {
@@ -88,6 +96,14 @@ const updateCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
+
+    if (!name) {
+      return res.status(409).json({
+        success: false,
+        message: "Data cannot empty",
+        data: {},
+      });
+    }
 
     const getCategory = await Category.findByPk(id);
 
