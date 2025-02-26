@@ -1,5 +1,69 @@
 const pool = require("../database/database");
 const slugify = require("slugify");
+const { Sequelize, DataTypes, Model } = require("sequelize");
+const sequelize = require("../database/sequelize");
+
+class News extends Model {}
+
+News.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    imageurl: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+    },
+    userid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+      onDelete: "CASCADE",
+    },
+    categoryid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+      references: {
+        model: "categories",
+        key: "id",
+      },
+      onDelete: "SET DEFAULT"
+    },
+    slug: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      unique: true,
+    },
+  },
+  {
+    sequelize,
+    modelName: "News",
+    tableName: "news",
+    timestamps: false,
+  }
+);
+
+// folder baru
 
 // GET ALL NEWS MODELS
 const getAllNewsModels = async () => {

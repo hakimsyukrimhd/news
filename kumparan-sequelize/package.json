@@ -1,18 +1,17 @@
 {
-  "name": "kumparan",
+  "name": "kumparan-sequelize",
   "version": "1.0.0",
-  "description": "News collection from kumparan",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Hakim",
+  "author": "hackim",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "express": "^4.21.2",
     "pg": "^8.13.3",
-    "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5",
-    "slugify": "^1.6.6"
+    "sequelize-cli": "^6.6.2"
   }
 }

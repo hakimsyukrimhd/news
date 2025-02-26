@@ -19,5 +19,5 @@ app.use((req, res, next) => {
 app.use("/", homePage);
 
 app.listen(PORT, () => {
-  console.log("This app running on PORT", PORT);
+  console.log("This app listening on the server,", PORT);
 });
