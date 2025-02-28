@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.use("/user", users);
+router.use("/users", users);
 router.use("/category", categories);
 
 module.exports = router;
