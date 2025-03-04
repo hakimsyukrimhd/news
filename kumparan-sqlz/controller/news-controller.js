@@ -1,17 +1,9 @@
-const { News, User, Category } = require("../models");
+const { News, User, Category, Tag } = require("../models");
 const slugify = require("slugify");
 
 const getAllNews = async (req, res) => {
   try {
-    const news = await News.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name", "username"],
-        },
-        { model: Category, attributes: ["name"] },
-      ],
-    });
+    const news = await News.findAll();
 
     res.status(200).json({
       success: true,

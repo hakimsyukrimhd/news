@@ -30,24 +30,6 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
-      CategoryId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Categories",
-          key: "id",
-        },
-        onDelete: "CASCADE",
-      },
-      TagId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Tags",
-          key: "id",
-        },
-        onDelete: "CASCADE",
-      },
       slug: {
         type: Sequelize.STRING,
         allowNull: false,
