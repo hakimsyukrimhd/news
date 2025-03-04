@@ -141,7 +141,7 @@ const updateUser = async (req, res) => {
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "User Not Found",
         data: {},
@@ -149,14 +149,19 @@ const updateUser = async (req, res) => {
     }
 
     if (!name && !username && !password) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Input atleast one field",
         data: {},
       });
     }
 
-    const updateUser = await User.update({ name, username, password }, { where: { id } });
+    let newPassword = user.password;
+    if (password) {
+      newPassword = await bcrypt.hash(password, 10);
+    }
+
+    const updateUser = await User.update({ name, username, password: newPassword }, { where: { id } });
 
     const getUser = await User.findByPk(id);
 

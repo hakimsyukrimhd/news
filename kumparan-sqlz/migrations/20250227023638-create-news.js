@@ -17,11 +17,11 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      imageurl: {
+      imageUrl: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -30,7 +30,7 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
-      categoryId: {
+      CategoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
