@@ -1,12 +1,9 @@
 const router = require("express").Router();
-const news = require("./news");
 const { getCategories } = require("../controller/category-controller");
 const { getCategory } = require("../controller/category-controller");
 const { addCategory } = require("../controller/category-controller");
 const { updateCategory } = require("../controller/category-controller");
 const { deleteCategory } = require("../controller/category-controller");
-
-router.use("/news", news);
 
 router.get("/", (req, res) => {
   getCategories(req, res);
@@ -27,5 +24,6 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   deleteCategory(req, res);
 });
+
 
 module.exports = router;

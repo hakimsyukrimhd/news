@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      News.belongsTo(models.User);
-      News.belongsTo(models.Category);
+      News.belongsTo(models.User, { foreignKey: "userId" });
+      News.belongsTo(models.Category, { foreignKey: "categoryId" });
     }
   }
   News.init(
@@ -17,13 +17,20 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       body: DataTypes.TEXT,
       imageurl: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
-      categoryId: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.INTEGER,
+        field: "userid",
+      },
+      categoryId: {
+        type: DataTypes.INTEGER,
+        field: "categoryid",
+      },
       slug: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "News",
+      tableName: "News",
     }
   );
   return News;

@@ -1,5 +1,6 @@
 "use strict";
 
+const bcrypt = require("bcryptjs");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,22 +9,24 @@ module.exports = {
      *
      * Example:
      */
+    const saltRounds = 10; // Jumlah salt rounds untuk hashing
     const users = [
       {
         name: "Hakim Syukri",
         username: "Hakim_re",
-        password: "hakim0909",
+        password: await bcrypt.hash("hakim0909", saltRounds), // Hash password
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: "Syukri Hakim",
         username: "Syukri_po",
-        password: "syukri@33",
+        password: await bcrypt.hash("syukri@33", saltRounds), // Hash password
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ];
+
     await queryInterface.bulkInsert("Users", users, {});
   },
 
