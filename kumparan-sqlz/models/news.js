@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       News.belongsTo(models.User, { foreignKey: "UserId" });
-      News.belongsTo(models.Category, { foreignKey: "CategoryId" });
+      News.belongsToMany(models.Category, { foreignKey: "CategoryId" });
+      News.belongsToMany(models.Tag, { foreignKey: "TagId" });
     }
   }
   News.init(
@@ -24,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       CategoryId: {
         type: DataTypes.INTEGER,
         field: "CategoryId",
+      },
+      TagId: {
+        type: DataTypes.INTEGER,
+        field: "TagId",
       },
       slug: DataTypes.STRING,
     },

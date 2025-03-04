@@ -39,6 +39,15 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
+      TagId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Tags",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+      },
       slug: {
         type: Sequelize.STRING,
         allowNull: false,

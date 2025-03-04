@@ -1,5 +1,7 @@
+require("dotenv").config(); // ini untuk mengaktifkan env
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userRegister = async (req, res) => {
   try {
@@ -13,7 +15,6 @@ const userRegister = async (req, res) => {
       });
     }
 
-    // NANTI TANYA KENAPA USER BUKAN USERS
     const user = await User.findOne({ where: { username } });
 
     if (user) {
@@ -24,8 +25,7 @@ const userRegister = async (req, res) => {
       });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(password, 10);
 
     const userRegister = await User.create({ name, username, password: hash });
 
@@ -69,27 +69,27 @@ const userLogin = async (req, res) => {
       });
     }
 
-    const checkPassword = await bcrypt.compare(password, user.password, (err, result) => {
-      if (result) {
-        const userData = user.toJSON();
-        delete userData.password;
+    const checkPassword = await bcrypt.compare(password, user.password);
 
-        res.status(201).json({
-          success: true,
-          message: "Login succes",
-          data: userData,
-        });
-      } else {
-        return res.status(401).json({
-          success: false,
-          message: "Incorrect Password",
-          data: {},
-        });
-      }
-      if (err) {
-        console.error("Error comparing passwords:", err);
-        return;
-      }
+    if (!checkPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Incorrect Password",
+        data: {},
+      });
+    }
+
+    const userData = {
+      name: user.name,
+      username: user.username,
+    };
+
+    const accesToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET);
+
+    res.status(200).json({
+      success: true,
+      message: "Login Succes",
+      accesToken: accesToken,
     });
   } catch (err) {
     console.error(err);

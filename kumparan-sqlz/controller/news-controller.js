@@ -1,9 +1,17 @@
-const { News } = require("../models");
+const { News, User, Category } = require("../models");
 const slugify = require("slugify");
 
 const getAllNews = async (req, res) => {
   try {
-    const news = await News.findAll();
+    const news = await News.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name", "username"],
+        },
+        { model: Category, attributes: ["name"] },
+      ],
+    });
 
     res.status(200).json({
       success: true,
@@ -24,7 +32,16 @@ const getNewsBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
 
-    const news = await News.findOne({ where: { slug } });
+    const news = await News.findOne({
+      where: { slug },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "username"],
+        },
+        { model: Category, attributes: ["name"] },
+      ],
+    });
 
     if (!news) {
       return res.status(409).json({
