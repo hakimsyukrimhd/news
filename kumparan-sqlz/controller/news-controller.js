@@ -52,7 +52,7 @@ const getNewsBySlug = async (req, res) => {
     });
 
     if (!news) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "Data Not Found",
         data: {},

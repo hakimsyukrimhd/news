@@ -8,7 +8,7 @@ router.post("/register", userRegister);
 
 router.post("/login", userLogin);
 
-router.get("/:id", getUser);
+router.get("/:id", verifyToken, checkRole("subscriber", "reporter", "admin"), getUser);
 
 router.patch("/:id", verifyToken, checkRole("subscriber", "reporter", "admin"), updateUser);
 

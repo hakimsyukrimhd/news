@@ -7,9 +7,9 @@ router.get("/", getAllNews);
 
 router.get("/:slug", getNewsBySlug);
 
-router.post("/", verifyToken, checkRole("reporter", "admin"), addNews);
+router.post("/", verifyToken, checkRole("reporter"), addNews);
 
-router.patch("/:slug", verifyToken, checkRole("reporter", "admin"), updateNews);
+router.patch("/:slug", verifyToken, checkRole("reporter"), updateNews);
 
 router.delete("/:slug", verifyToken, checkRole("reporter", "admin"), deleteNews);
 
