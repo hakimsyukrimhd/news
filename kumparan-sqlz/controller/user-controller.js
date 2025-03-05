@@ -8,7 +8,7 @@ const userRegister = async (req, res) => {
     const { name, username, password } = req.body;
 
     if (!name || !username || !password) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Data must be complete",
         data: {},
@@ -18,7 +18,7 @@ const userRegister = async (req, res) => {
     const user = await User.findOne({ where: { username } });
 
     if (user) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Username has already in use",
         data: {},
@@ -52,7 +52,7 @@ const userLogin = async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Data must be complete",
         data: {},
@@ -62,7 +62,7 @@ const userLogin = async (req, res) => {
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "Cannot find your account",
         data: {},
@@ -108,7 +108,7 @@ const getUser = async (req, res) => {
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "User Not Found",
         data: {},
@@ -118,7 +118,7 @@ const getUser = async (req, res) => {
     const userData = user.toJSON();
     delete userData.password;
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "User Found",
       data: userData,
@@ -190,7 +190,7 @@ const deleteUser = async (req, res) => {
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "User Not Found",
         data: {},
@@ -199,7 +199,7 @@ const deleteUser = async (req, res) => {
 
     const deleteUser = await User.destroy({ where: { id } });
 
-    res.status(201).json({
+    res.status(204).json({
       success: true,
       message: "User deleted",
       data: {},

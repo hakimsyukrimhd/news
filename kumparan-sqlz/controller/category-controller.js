@@ -26,7 +26,7 @@ const getCategory = async (req, res) => {
     const category = await Category.findByPk(id);
 
     if (!category) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "Data Not Found",
         data: {},
@@ -53,7 +53,7 @@ const addCategory = async (req, res) => {
     const { name } = req.body;
 
     if (!name) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Data must be complete",
         data: {},
@@ -95,7 +95,7 @@ const updateCategory = async (req, res) => {
     const category = await Category.findByPk(id);
 
     if (!category) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "Category Not Found",
         data: {},
@@ -103,7 +103,7 @@ const updateCategory = async (req, res) => {
     }
 
     if (!name) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
         message: "Data must input",
         data: {},
@@ -136,7 +136,7 @@ const deleteCategory = async (req, res) => {
     const category = await Category.findByPk(id);
 
     if (!category) {
-      return res.status(409).json({
+      return res.status(404).json({
         success: false,
         message: "Category Not Found",
         data: {},
@@ -145,7 +145,7 @@ const deleteCategory = async (req, res) => {
 
     const deleteCategory = await Category.destroy({ where: { id } });
 
-    res.status(201).json({
+    res.status(204).json({
       success: true,
       message: "Category deleted",
       data: {},

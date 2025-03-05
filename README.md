@@ -73,6 +73,6 @@ Create Database with name : News
 
 | Tabel Name | Fields                                    | Relation                                    |
 | ---------- | ----------------------------------------- | ------------------------------------------- |
-| users      | username, password                        | user has many news                          |
+| users      | name, role: reporter/subscriber ,username, password                        | user has many news                          |
 | news       | title, body, imageUrl, userId, categoryId | news has one category, news belongs to user |
 | categories | name                                      | category has many news                      |

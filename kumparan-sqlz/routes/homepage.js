@@ -3,6 +3,7 @@ const users = require("./user");
 const categories = require("./category");
 const news = require("./news");
 
+
 router.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome to HomePage",

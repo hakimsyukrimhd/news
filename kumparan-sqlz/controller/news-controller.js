@@ -3,7 +3,25 @@ const slugify = require("slugify");
 
 const getAllNews = async (req, res) => {
   try {
-    const news = await News.findAll();
+    const news = await News.findAll({
+      attributes: ["id", "title", "body", "imageUrl", "slug"],
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "username"],
+        },
+        {
+          model: Category,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+        {
+          model: Tag,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+      ],
+    });
 
     res.status(200).json({
       success: true,
@@ -19,6 +37,9 @@ const getAllNews = async (req, res) => {
     });
   }
 };
+
+// tabel profile, relasi one to one dengan table uer, isinyo alamat medsos, alamat alamat, ttl, data diri, foriign key di salah satu tabelnyo
+// 
 
 const getNewsBySlug = async (req, res) => {
   try {
@@ -60,9 +81,9 @@ const getNewsBySlug = async (req, res) => {
 
 const addNews = async (req, res) => {
   try {
-    const { title, body, imageUrl, UserId, CategoryId } = req.body;
+    const { title, body, imageUrl, UserId } = req.body;
 
-    if (!title || !body || !imageUrl || !UserId || !CategoryId) {
+    if (!title || !body || !imageUrl || !UserId) {
       return res.status(400).json({
         success: false,
         message: "Data must be complete",
@@ -82,7 +103,7 @@ const addNews = async (req, res) => {
       });
     }
 
-    const newNews = await News.create({ title, body, imageUrl, UserId, CategoryId, slug: slugTitle });
+    const newNews = await News.create({ title, body, imageUrl, UserId, slug: slugTitle });
 
     res.status(201).json({
       success: true,

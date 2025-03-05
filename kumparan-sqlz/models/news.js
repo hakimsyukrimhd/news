@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       News.belongsTo(models.User);
-      News.belongsToMany(models.Category, { through: "NewsCategory" });
-      News.belongsToMany(models.Tag, { through: "NewsTag" });
+      News.belongsToMany(models.Category, { through: "NewsCategories" });
+      News.belongsToMany(models.Tag, { through: "NewsTags" });
     }
   }
   News.init(
