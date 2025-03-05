@@ -15,11 +15,6 @@ const getAllNews = async (req, res) => {
           attributes: ["name"],
           through: { attributes: [] },
         },
-        {
-          model: Tag,
-          attributes: ["name"],
-          through: { attributes: [] },
-        },
       ],
     });
 

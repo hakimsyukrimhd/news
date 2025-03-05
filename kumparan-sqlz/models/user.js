@@ -9,13 +9,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.News);
+      User.hasOne(models.UserProfile, { foreignKey: "UserId", onDelete: "CASCADE" });
     }
   }
   User.init(
     {
       name: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: DataTypes.ENUM("admin", "reporter", "subscriber"),
+        allowNull: false,
+        defaultValue: "subscriber",
+      },
     },
     {
       sequelize,
