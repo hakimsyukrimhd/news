@@ -11,6 +11,7 @@ module.exports = {
     const userProfile = [
       {
         UserId: 1,
+        email: "hakim@gmail.com",
         address: "Jalan Merdeka No. 1, Jakarta",
         phone: "081234567890",
         birthdate: "1995-06-15",
@@ -19,6 +20,7 @@ module.exports = {
       },
       {
         UserId: 2,
+        email: "hendrik@gmail.com",
         address: "Jalan Merdeka No. 1, Jakarta",
         phone: "081234567890",
         birthdate: "1995-06-15",
@@ -27,6 +29,7 @@ module.exports = {
       },
       {
         UserId: 3,
+        email: "france@gmail.com",
         address: "Jalan Merdeka No. 1, Jakarta",
         phone: "081234567890",
         birthdate: "1995-06-15",

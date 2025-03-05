@@ -13,7 +13,6 @@ module.exports = {
     const users = [
       {
         name: "Hakim Syukri",
-        email: "hackim@gmail.com",
         username: "Hakim_rw",
         password: await bcrypt.hash("hakim0909", 10), // Hash password
         role: "admin",
@@ -22,7 +21,6 @@ module.exports = {
       },
       {
         name: "Hendrik",
-        email: "hendrik@gmail.com",
         username: "hendrik99",
         password: await bcrypt.hash("hakim0909", 10), // Hash password
         role: "reporter",
@@ -31,7 +29,6 @@ module.exports = {
       },
       {
         name: "Frans",
-        email: "france@gmail.com",
         username: "france99",
         password: await bcrypt.hash("hakim0909", 10), // Hash password
         role: "subscriber",

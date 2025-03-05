@@ -1,8 +1,10 @@
-const { Category } = require("../models");
+const { Category, News } = require("../models");
 
 const getCategories = async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({
+      attributes: ["id", "name"],
+    });
 
     res.status(200).json({
       success: true,
@@ -23,7 +25,9 @@ const getCategory = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const category = await Category.findByPk(id);
+    const category = await Category.findByPk(id, {
+      attributes: ["id", "name"],
+    });
 
     if (!category) {
       return res.status(404).json({
@@ -63,19 +67,19 @@ const addCategory = async (req, res) => {
     const category = await Category.findOne({ where: { name } });
 
     if (category) {
-      return res.status(409).json({
+      return res.status(400).json({
         success: false,
-        message: "Category has already in use",
+        message: "Category is already in use",
         data: {},
       });
     }
 
-    const addCategory = await Category.create({ name });
+    const newCategory = await Category.create({ name });
 
     res.status(201).json({
       success: true,
       message: "Category has been added",
-      data: addCategory,
+      data: newCategory,
     });
   } catch (err) {
     console.error(err);

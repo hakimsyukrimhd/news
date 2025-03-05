@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const userProfile = require("./userprofile");
 const { userRegister } = require("../controller/user-controller");
 const { userLogin } = require("../controller/user-controller");
 const { getUser } = require("../controller/user-controller");
@@ -24,5 +25,7 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   deleteUser(req, res);
 });
+
+router.use("/profile", userProfile);
 
 module.exports = router;

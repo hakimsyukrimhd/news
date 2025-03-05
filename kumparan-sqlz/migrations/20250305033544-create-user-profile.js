@@ -19,14 +19,19 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
-      address: {
+      email: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       phone: {
         type: Sequelize.STRING,
       },
       birthdate: {
         type: Sequelize.DATE,
+      },
+      address: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
