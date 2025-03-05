@@ -1,17 +1,14 @@
-const { User } = require("../models");
-
-async function authorization(req, res, next) {
-  const user = req.user;
-  const checkUser = await User.findOne({ where: { username: user.username } });
-  if (checkUser) {
+const checkRole = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: `Access Denied! Only ${roles.join(" or ")} allowed`,
+        data: {},
+      });
+    }
     next();
-  } else {
-    res.status(403).json({
-      success: false,
-      message: "",
-      data: {},
-    });
-  }
-}
+  };
+};
 
-module.exports = authorization;
+module.exports = { checkRole };

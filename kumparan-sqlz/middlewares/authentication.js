@@ -1,21 +1,29 @@
-// function authentication ,
 const jwt = require("jsonwebtoken");
 
-function authentication(req, res, next) {
-  const token = req.headers.token;
-  var decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-  console.log(decoded);
-  if (!decoded) {
-    res.status(400).json({
+function verifyToken(req, res, next) {
+  const authHeader = req.header("Authorization");
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({
       success: false,
-      message: "Invalid Token",
+      message: "Unauthorized! Token required.",
       data: {},
     });
-  } else {
-    // cari user dulu di database
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     req.user = decoded;
     next();
+  } catch (err) {
+    return res.status(403).json({
+      success: false,
+      message: "Forbidden! Invalid or expired token.",
+      data: {},
+    });
   }
 }
 
-module.exports = authentication;
+module.exports = { verifyToken };

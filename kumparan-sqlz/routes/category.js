@@ -1,29 +1,16 @@
 const router = require("express").Router();
-const { getCategories } = require("../controller/category-controller");
-const { getCategory } = require("../controller/category-controller");
-const { addCategory } = require("../controller/category-controller");
-const { updateCategory } = require("../controller/category-controller");
-const { deleteCategory } = require("../controller/category-controller");
+const { getCategories, getCategory, addCategory, updateCategory, deleteCategory } = require("../controller/category-controller");
+const { verifyToken } = require("../middlewares/authentication");
+const { checkRole } = require("../middlewares/authorization");
 
-router.get("/", (req, res) => {
-  getCategories(req, res);
-});
+router.get("/", getCategories);
 
-router.get("/:id", (req, res) => {
-  getCategory(req, res);
-});
+router.get("/:id", getCategory);
 
-router.post("/", (req, res) => {
-  addCategory(req, res);
-});
+router.post("/", verifyToken, checkRole("admin"), addCategory);
 
-router.patch("/:id", (req, res) => {
-  updateCategory(req, res);
-});
+router.patch("/:id", verifyToken, checkRole("admin"), updateCategory);
 
-router.delete("/:id", (req, res) => {
-  deleteCategory(req, res);
-});
-
+router.delete("/:id", verifyToken, checkRole("admin"), deleteCategory);
 
 module.exports = router;

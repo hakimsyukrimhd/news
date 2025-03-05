@@ -29,13 +29,14 @@ const userRegister = async (req, res) => {
 
     const userRegister = await User.create({ name, username, password: hash });
 
-    const userData = userRegister.toJSON();
-    delete userData.password;
+    const getUser = await User.findOne({ where: { username }, attributes: ["id", "name", "username", "role"] });
 
     res.status(201).json({
       success: true,
       message: "User has been registered",
-      data: userData,
+      data: {
+        user: getUser,
+      },
     });
   } catch (err) {
     console.error(err);
@@ -72,7 +73,7 @@ const userLogin = async (req, res) => {
     const checkPassword = await bcrypt.compare(password, user.password);
 
     if (!checkPassword) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: false,
         message: "Incorrect Password",
         data: {},
@@ -80,16 +81,18 @@ const userLogin = async (req, res) => {
     }
 
     const userData = {
+      id: user.id,
       name: user.name,
       username: user.username,
+      role: user.role,
     };
 
-    const accesToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET);
 
     res.status(200).json({
       success: true,
       message: "Login Succes",
-      accesToken: accesToken,
+      accessToken: accessToken,
     });
   } catch (err) {
     console.error(err);
