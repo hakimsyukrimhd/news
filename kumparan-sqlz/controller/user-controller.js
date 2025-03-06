@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const userRegister = async (req, res) => {
   try {
-    const { name, username, password } = req.body;
+    const { name, username, password, role } = req.body;
 
     if (!name || !username || !password) {
       return res.status(400).json({
@@ -27,7 +27,7 @@ const userRegister = async (req, res) => {
 
     const hash = await bcrypt.hash(password, 10);
 
-    const userRegister = await User.create({ name, username, password: hash });
+    const userRegister = await User.create({ name, username, password: hash, role });
 
     const getUser = await User.findOne({ where: { username }, attributes: ["id", "name", "username", "role"] });
 
