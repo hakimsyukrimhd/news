@@ -14,6 +14,6 @@ router.patch("/:id", verifyToken, checkUserOwner, updateUser);
 
 router.delete("/:id", verifyToken, checkUserOwner, deleteUser);
 
-router.use("/profile", userProfile);
+router.use("/profile", verifyToken, checkUserOwner, userProfile);
 
 module.exports = router;
