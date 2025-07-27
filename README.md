@@ -51,13 +51,13 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 
 # ENDPOINTS CATEGORY
 
-| Routes               | Method | Requirement   |
-| -------------------- | ------ | ------------- |
-| /news/category       | GET    | -             |
-| /news/category/:id   | GET    | params        |
-| /news/category       | POST   | Body          |
-| /news/category/:id   | PATCH  | body & params |
-| /news/category/:id   | DELETE | params        |
+| Routes             | Method | Requirement   |
+| ------------------ | ------ | ------------- |
+| /news/category     | GET    | -             |
+| /news/category/:id | GET    | params        |
+| /news/category     | POST   | Body          |
+| /news/category/:id | PATCH  | body & params |
+| /news/category/:id | DELETE | params        |
 
 ### USER/ AUTHOR Body Requirements
 
@@ -71,8 +71,8 @@ This repository contain news that use all of my knowledge from belajar-javascrip
 
 Create Database with name : News
 
-| Tabel Name | Fields                                    | Relation                                    |
-| ---------- | ----------------------------------------- | ------------------------------------------- |
-| users      | name, role: reporter/subscriber ,username, password                        | user has many news                          |
-| news       | title, body, imageUrl, userId, categoryId | news has one category, news belongs to user |
-| categories | name                                      | category has many news                      |
+| Tabel Name | Fields                                              | Relation                                    |
+| ---------- | --------------------------------------------------- | ------------------------------------------- |
+| users      | name, role: reporter/subscriber ,username, password | user has many news                          |
+| news       | title, body, imageUrl, userId, categoryId           | news has one category, news belongs to user |
+| categories | name                                                | category has many news                      |
