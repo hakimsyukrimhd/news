@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       News.belongsToMany(models.Category, { through: "NewsCategories" });
     }
   }
+
+
+  
   News.init(
     {
       title: DataTypes.STRING,
